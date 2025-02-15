@@ -19,6 +19,11 @@ start_name = st.text_input("Nombre inicial:")
 end_name = st.text_input("Nombre final:")
 index_name = st.text_input("Numero a buscar: ")
 
+#Sexo
+selected_sex = st.selectbox("Select Sex", names_data['sex'].unique())
+
+st.write(f"Selected Option: {selected_sex!r}")
+
 # Botón para ejecutar la búsqueda
 if st.button("Buscar"):
     if start_name and end_name:
@@ -44,5 +49,12 @@ if st.button("Numero"):
             st.warning("Por favor, ingresa un número válido.")
     else:
         st.warning("Por favor, ingresa un número para buscar.")
+
+# Botón para ejecutar la búsqueda por sexo
+if st.button("Sexo"):
+    if selected_sex:
+        filtered_data = names_data[
+            names_data['sex'] == selected_sex]
+        st.dataframe(filtered_data)
 
 st.dataframe(names_data)
