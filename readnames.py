@@ -1,42 +1,30 @@
-import pandas as pd 
+import pandas as pd
+import streamlit as st
 
-import streamlit as st  
-
-names_link = 'dataset.csv'  
-names_data = pd.read_csv(names_link)
-
-###
-
+# Función para cargar los datos con caché
 @st.cache_data
 def load_data():
-    data = names_data
-    return data
-    #names_link = 'dataset.csv'
-    #return pd.read_csv(names_link)
+    return pd.read_csv('dataset.csv')
 
-st.title("Streamlit and pandas")
-# Cargar datos con caché
+# Título de la app
+st.title("Buscador de Nombres")
+
+# Cargar datos
 names_data = load_data()
 
-###Grafico
-def bienvenida(nombre):
-    mymensaje = 'bienvenido/a: ' + nombre
-    return mymensaje
+# Inputs para definir el rango de búsqueda
+start_name = st.text_input("Nombre inicial:")
+end_name = st.text_input("Nombre final:")
 
-myname = st.text_input('nombre :')
-if (myname):
-    mensaje = bienvenida(myname)
-    st.write(f"Tu nombre es: {mensaje}")
+# Botón para ejecutar la búsqueda
+if st.button("Buscar"):
+    if start_name and end_name:
+        filtered_data = names_data[
+            (names_data['name'] >= start_name) & (names_data['name'] <= end_name)
+        ]
+        st.write(f"Mostrando nombres entre **{start_name}** y **{end_name}**")
+        st.dataframe(filtered_data)
+    else:
+        st.warning("Por favor, ingresa ambos nombres para definir el rango.")
 
-#
-name_query = st.text_input("Buscar nombre:", "")
-if name_query:
-    filtered_data = names_data[names_data['name'].str.startswith(name_query, na=False)]
-else:
-    filtered_data = names_data #Muestra todos
-
-# Mostrar los datos filtrados
-st.dataframe(filtered_data)
-
-#st.dataframe(names_data)
-
+st.dataframe(names_data)
