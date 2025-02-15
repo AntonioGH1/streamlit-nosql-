@@ -28,5 +28,15 @@ if (myname):
     mensaje = bienvenida(myname)
     st.write(f"Tu nombre es: {mensaje}")
 
-st.dataframe(names_data)
+#
+name_query = st.text_input("Buscar nombre:", "")
+if name_query:
+    filtered_data = names_data[names_data['name'].str.startswith(name_query, na=False)]
+else:
+    filtered_data = names_data #Muestra todos
+
+# Mostrar los datos filtrados
+st.dataframe(filtered_data)
+
+#st.dataframe(names_data)
 
