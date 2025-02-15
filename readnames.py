@@ -18,4 +18,15 @@ st.title("Streamlit and pandas")
 # Cargar datos con caché
 names_data = load_data()
 
+###Grafico
+def bienvenida(nombre):
+    mymensaje = 'bienvenido/a: ' + nombre
+    return mymensaje
+
+myname = st.text_input('nombre :')
+if (myname):
+    mensaje = bienvenida(myname)
+    st.write(f"Tu nombre es: {mensaje}")
+
 st.dataframe(names_data)
+
