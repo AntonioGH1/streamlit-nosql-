@@ -9,6 +9,13 @@ def load_data():
 # Título de la app
 st.title("Buscador de Nombres")
 
+#Logo
+st.markdown('<h3 style="text-align: center; color: red; font-weight: bold;">Antonio</h1>', unsafe_allow_html=True)
+st.markdown('<h3 style="text-align: center; font-weight: bold;">S21004480</h1>', unsafe_allow_html=True)
+
+logo_path = "foto.png"
+st.image(logo_path, width=50)
+
 # Cargar datos
 names_data = load_data()
 # Asegurarse de que 'index' sea un valor numérico
