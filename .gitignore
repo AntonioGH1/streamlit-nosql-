@@ -1,0 +1,15 @@
+# Ignorar el archivo con secretos
+.streamlit/secrets.toml
+
+# Ignorar entornos virtuales (si usás uno)
+venv/
+streamlit-env/
+
+# Ignorar archivos de Python compilados
+__pycache__/
+*.pyc
+
+# Archivos temporales
+*.log
+*.swp
+.DS_Store
